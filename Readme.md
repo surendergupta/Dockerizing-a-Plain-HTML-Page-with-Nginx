@@ -2,6 +2,9 @@
 
 This repository demonstrates how to Dockerize a simple HTML page using Nginx as the web server.
 
+## Github URL
+```https://github.com/surendergupta/Dockerizing-a-Plain-HTML-Page-with-Nginx.git```
+
 ## Files
 
 ### index.html
