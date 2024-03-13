@@ -33,14 +33,14 @@ This repository demonstrates how to Dockerize a simple HTML page using Nginx as 
 4. **Stop the Docker Container (Optional):**
     ```docker stop <container-id>```
     
-    # Replace `<container-id>` with the ID of the running container.
+    Replace `<container-id>` with the ID of the running container.
 5. **Tag your Docker image:**
 
     ```docker tag my-nginx-image:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-nginx-image:latest```
 
 6. **Log in to Amazon ECR**
     Before pushing the image, you need to authenticate Docker to your ECR registry:
-    
+
     ```aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-ecr-registry-uri>```
 
     Replace <your-region> with the AWS region where your ECR repository is located, and <your-ecr-registry-uri> with your ECR registry URI.
