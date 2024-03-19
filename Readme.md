@@ -25,31 +25,58 @@ This repository demonstrates how to Dockerize a simple HTML page using Nginx as 
 ## Building and Running the Docker Container
 
 1. **Build the Docker Image:**
-    ```docker build -t my-nginx-image .```
+    ```docker build -t nginx-docker-html .```
+    ![alt text](image.png)
 
 2. **Run the Docker Container:**
-    ```docker run -p 3025:80 -v ${PWD}:/usr/share/nginx/html mginx-docker-html```
+    ```docker run -p 3025:80 -v ${PWD}:/usr/share/nginx/html nginx-docker-html```
+    
+    ![alt text](image-1.png)
+
+    ![alt text](image-3.png)
 
 3. **Access the Web Page:**
     Open a web browser and navigate to `http://localhost:3025/` to view the served HTML page.
+    
+    ![alt text](image-2.png)
 
 4. **Stop the Docker Container (Optional):**
     ```docker stop <container-id>```
     
+    ![alt text](image-4.png)
+    
     Replace `<container-id>` with the ID of the running container.
-5. **Tag your Docker image:**
-
-    ```docker tag my-nginx-image:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-nginx-image:latest```
-
-6. **Log in to Amazon ECR**
-    Before pushing the image, you need to authenticate Docker to your ECR registry:
-
+5. **Log in to Amazon ECR**
+    Before pushing the image, you need to authenticate Docker to your ECR registry: 
+    Use the AWS CLI:
     ```aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <your-ecr-registry-uri>```
+
+    ```aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t5n9y4h0```
 
     Replace <your-region> with the AWS region where your ECR repository is located, and <your-ecr-registry-uri> with your ECR registry URI.
 
-7. **Push your Docker image to ECR**
-    ```docker push <your-ecr-registry-uri>/my-nginx-image:latest```
+    ![alt text](image-5.png)
+
+6. **Build your Docker image using the following command. You can skip this step if your image is already built:**
+    ```docker build -t nginx-docker-html .```
+
+    ![alt text](image-6.png)
+
+7. **After the build completes, tag your image so you can push the image to this repository: Tag your Docker image:**
+
+    ```docker tag nginx-docker-html:latest public.ecr.aws/t5n9y4h0/nginx-docker-html:latest```
+
+   ![alt text](image-7.png)
+
+8. **Push your Docker image to ECR**
+    ```docker push public.ecr.aws/t5n9y4h0/nginx-docker-html:latest```
     After running this command, your Docker image will be pushed to your ECR repository.
+
+    ![alt text](image-8.png)
+
+    ![alt text](image-9.png)
+
+9. **Public Repository on ECR**
+    ```public.ecr.aws/t5n9y4h0/nginx-docker-html:latest```
 
 
